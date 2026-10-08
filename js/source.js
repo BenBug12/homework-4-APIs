@@ -13,11 +13,11 @@ function convertMsToMinSec(ms) {
 
 
 // IDs and secret token should come from Spotify
-localStorage.setItem("artist_id", "");
-localStorage.setItem("access_token", "");
-localStorage.setItem("track_id_1", "");
-localStorage.setItem("track_id_2", "");
-localStorage.setItem("track_id_3", "");
+localStorage.setItem("artist_id", "776Uo845nYHJpNaStv1Ds4");
+localStorage.setItem("access_token", "BQBniEAJ43IdsZTutcpnlqRZZeApyP222KRTOVr_35MfYKZ90EMye1ITxhxh8TRi3UNVUEpnAuZmdm2l7YgovX2KxtrN5d3lRQsnsbNY0lfP2duQRJ6ygg0PW-bIpxU9HwkxFJbaZ1sN");
+localStorage.setItem("track_id_1", "2aoo2jlRnM3A0NyLQqMN2f");
+localStorage.setItem("track_id_2", "0wJoRiX5K5BxlqZTolB2LD");
+localStorage.setItem("track_id_3", "0NWPxcsf5vdjdiFUI8NgkP");
 
 
 async function load(){
@@ -48,19 +48,22 @@ async function load(){
         document.querySelector("#artist-name").textContent = artistData.name;
       }
       if (artistData.images && artistData.images.length > 0) {
-        document.querySelector("#artist-image img").src = artistData.images[0].url;
+        const artistImage = document.querySelector(".artist-image img");
+        if (artistImage) {
+          artistImage.src = artistData.images[0].url;
+        }
       }
-      // Fetcg abd update top tracks
+      // Fetch and update top tracks
       const trackElements = document.querySelectorAll(".track");
       for(let i = 0; i < trackIDs.length; i++) {
-        if (!tackIDs[i] || !trackElements[i]) continue;
+        if (!trackIDs[i] || !trackElements[i]) continue;
 
         const trackResponse = await fetch(`https://api.spotify.com/v1/tracks/${trackIDs[i]}`, { headers });
         const trackData = await trackResponse.json();
         const trackRow = trackElements[i];
 
         if (trackData.album && trackData.album.images.length > 0) {
-          trackRow.querySelector("img").scr =trackData.album.images[0].url;
+          trackRow.querySelector("img").src =trackData.album.images[0].url;
         }
         trackRow.querySelector(".track-title").textContent = trackData.name;
         trackRow.querySelector(".track-album").textContent = trackData.album.name;
@@ -70,10 +73,10 @@ async function load(){
       
       // Fetch and update the albums
       const albumsResponse = await fetch (`https://api.spotify.com/v1/artists/${artistID}/albums`, { headers });
-      const albunmsData = await albumsResponse.json();
+      const albumsData = await albumsResponse.json();
       const albumCards = document.querySelectorAll(".album-card");
 
-      if (albumsDataq.items) {
+      if (albumsData.items) {
         albumsData.items.forEach((album, index) => {
           if (albumCards[index]) {
             const card = albumCards[index];
@@ -82,7 +85,7 @@ async function load(){
           }
           card.querySelector("h3").textContent = album.name;
           const releaseYear = album.release_date ? album.release_date.split("-") [0] : "";
-          card.querySelector("p").textCongtent = `${releaseYear} ${album.ablbum_type}`;
+          card.querySelector("p").textContent = `${releaseYear} ${album.ablbum_type}`;
           }
         });
       }
