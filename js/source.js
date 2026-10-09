@@ -14,7 +14,8 @@ function convertMsToMinSec(ms) {
 
 // IDs and secret token should come from Spotify
 localStorage.setItem("artist_id", "776Uo845nYHJpNaStv1Ds4");
-localStorage.setItem("access_token", "BQBniEAJ43IdsZTutcpnlqRZZeApyP222KRTOVr_35MfYKZ90EMye1ITxhxh8TRi3UNVUEpnAuZmdm2l7YgovX2KxtrN5d3lRQsnsbNY0lfP2duQRJ6ygg0PW-bIpxU9HwkxFJbaZ1sN");
+// just swap out the access_token every time it expires
+localStorage.setItem("access_token", "BQCkT3q-M368mDn8edCG-w9DOB7sk2K3NdR27am0ZC6obhV86REhIx9LabnVYZXuyLsI7RTBnRwKbDw7w3D1LlTxlLyav65qHoOYXBOIgZVAM5LdBbBj97TqaU4fpLNk6YElNhY_chYm");
 localStorage.setItem("track_id_1", "2aoo2jlRnM3A0NyLQqMN2f");
 localStorage.setItem("track_id_2", "0wJoRiX5K5BxlqZTolB2LD");
 localStorage.setItem("track_id_3", "0NWPxcsf5vdjdiFUI8NgkP");
@@ -94,6 +95,3 @@ async function load(){
     }
 }
 load();
-
-
-   
